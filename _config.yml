@@ -10,7 +10,6 @@ permalink:        pretty
 title:            
 tagline:          'Write to Learn'
 description:      'Thoughts as I read through material.'
-url:              http://hyde.getpoole.com
 baseurl:          /
 
 author:
@@ -22,7 +21,5 @@ paginate:         5
 # Custom vars
 version:          2.1.0
 
-github:
-  repo:           https://github.com/poole/hyde
 
 gems: [jekyll-gist]
