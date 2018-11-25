@@ -10,7 +10,7 @@ permalink:        pretty
 title:            
 tagline:          'Write to Learn'
 description:      'Thoughts as I read through material.'
-baseurl:          'blog'
+baseurl:          'blog/'
 
 author:
   name:           'Rishabh Ranawat'
