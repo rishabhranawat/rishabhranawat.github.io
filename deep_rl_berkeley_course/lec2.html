@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+	
+	  Writing to Learn
+	
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+								 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script> 
+	  $(function(){
+		$("#includedContent").load("policy_evaluation.html"); 
+	  });
+	  </script> 
+</head>
+
+
+  <body>
+
+	<div class="sidebar">
+  <div class="container sidebar-sticky">
+	<div class="sidebar-about">
+	  <p class="lead">Rish's Blog</p>
+	</div>
+
+	<nav class="sidebar-nav">
+	  <a class="sidebar-nav-item" href="/">Home</a>
+		<a class="sidebar-nav-item" href="/about/">About</a>
+		<a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a>
+	  <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a>
+	  <span class="sidebar-nav-item">Currently v2.1.0</span>
+	</nav>
+	<p>&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+	<div class="content container">
+	  <div class="post">
+  <h1 class="post-title">Building Prerequisite Graphs</h1>
+  <span class="post-date">18th August 2018</span>
+
+<blockquote>Imitation Learning - Lecture 1</blockquote>
+
+Supervised Learning:
+1. Input image (pixels) -- output is a label
+2. In the middle is the model we want to learn:
+	a. Want to parameterize a probability distribution
+	b. \( \pi_{\theta} (a | o)\) i.e., the probability of obsering
+	the label \( a \) given the image (or observation) \( o\).
+	c. \( \theta \) are just the parameters of the probability distribution. For instance, if we were using a deep neural network, then the weight matrices would be the parameters of that distribution.
+
+Going from supervised learning to sequential decision making problem.
+1. We redefine the model as the following: \( \pi_{\theta}(a_{t} | o_{t})\).
+2. Now, \( a_{t}\) is an action.
+3. The output could be discrete or could be continous (for instance, pet, ignore etc., or the mean and variance of a gaussian)
+4. Terminology:
+	a. \( s_{t}\) is the state -- sufficient summary of the world
+	b. \( o_{t}\) is the observation -- lossy consequence
+	c. \( a_{t}\) is the action
+	d. \( \pi_{\theta}(a_{t} | o_{t}) \) policy
+	e. \( \pi_{\theta}(a_{t} | s_{t})\) fully observed policy
+	f. Transition function (transition model): p(s_{t+1} | s_{t}, a_{t})
+	Markovity
+
+Graphical Model:
+
+
+Behavior Cloning (implementation via it's exactly like Supervised Learning)
+
+Bojarski et. al. '16
+
+Using noise to make behavior cloning work.
+
+Taking a sequence of states and actions (linear quadratic regulators -- controllers)
+
+Imitating a distribution of policies.
+
+The distribution of observation in the training set is \( p_{data}(o_{t})\). When we use \( p_{\pi_{\theta}}(o_{t})\) i.e., the two distributions will be different.
+
+Can, we make a the following:
+
+$$ p_{data}(o_{t}) = p_{\pi_{\theta}}(o_{t})$$
+
+Instead of being clever about the imitating distribution, we be clever about \( p_{data}(o_{t})\)
+
+
+<blockquote>DAgger: Dataset Aggregation</blockquote>
+
+goal: collect training data from \( p_{\pi_{\theta}(o_{t})}\) instead of p_{data}(o_{t})
+
+just run \( a_{t}\)
+
+<ul>
+	<li> train \( \pi_{\theta}(a_{t} | o_{t})\) from human data \( D = {o_1, a_1, \dots, o_{N}, a_{N}}\) </li>
+	<li>run \pi_{\theta}(a_{t} | o_{t}) to get a dataset \( D_{\pi} = {o_1, \dots, o_M}\)</li>
+	<li>Ask human to label \( D_{\pi}\) with actions \( a_{t}\)</li>
+	<li>Aggregate: \( D \leftarrow D \cup D_{\pi}\)</li>
+	<li>Repeat</li>
+</ul>
+
+Methods in online learning (Ross et. al. 11)
+
+Can we make it work without more data?
+1. DAgger addresses the problem of distributional drift?
+2. What if our model is so good that it doesn't drift?
+3. Mimic expert behavior very accurately
+4. Don't overfit
+
+Possibilities for failure?
+
+1. Non-markovian behavior
+2. Multimodal behavior (acting in different ways in seemingly similar siutations)
+
+Train a network using:
+
+\( \pi_{theta}(a_{t} | o_{1}, ..., o_{t})\)
+
+i.e., use an RNN. LSTM seems to work decently well.
+
+1. Output a mixture of Gaussians
+2. Latent variable models
+3. Autoregressive discretization
+
+<blockquote>Output mixtures of Gaussians</blockquote>
+
+Mixture Density networks
+
+$$ \pi(a | o) = \sum_{i} w_{i} N(\mu_{i}, \sum_{i})$$
+
+<blockquote>Papers</blockquote>
+
+<ul>
+	<li>A Machine Learning Apporach to Visual Perception of Forest Trails for Mobile Robots</li>
+	<li>Dealing with the drift</li>
+	The training data doesn't come from a quadrator
+	Walking through a forest trail
+</ul>
+
+<ul>
+	<li>Learning real manipulation tasks from virtual demonstrations using LSTM</li>
+	Learning Manipulation Tasks	
+</ul>
+
+<ul>Inverse Imitation Leaerning</ul>
+
+<p></p>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+	
+	  <li>
+		<h3>
+		  <a href="/2013/12/28/introducing-hyde/">
+			Introducing Hyde
+			<small>28 Dec 2013</small>
+		  </a>
+		</h3>
+	  </li>
+	
+	  <li>
+		<h3>
+		  <a href="/2012/02/07/example-content/">
+			Example content
+			<small>07 Feb 2012</small>
+		  </a>
+		</h3>
+	  </li>
+	
+  </ul>
+</div>
+
+	</div>
+
+  </body>
+</html>

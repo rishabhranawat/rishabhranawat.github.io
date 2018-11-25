@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Writing to Learn
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script> 
+      $(function(){
+        $("#includedContent").load("policy_evaluation.html"); 
+      });
+      </script> 
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <p class="lead">Rish's Blog</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+        <a class="sidebar-nav-item" href="/about/">About</a>
+        <a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a>
+      <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v2.1.0</span>
+    </nav>
+    <p>&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">MDPs & Sister DPs</h1>
+  <span class="post-date">22 July 2018</span>
+  <p>Markov Decision Process have been extensively studied and form the basis of a wide range of reinforcement learning algorithms.</p>
+
+  <p>Imagine you are extremely sleepy early in the morning at work and you need to figure out how to stay awake. Further, imagine you (the agent) doesn't have the prerequisite knowledge of what kind of beverages you can drink to stay awake.</p>
+
+
+
+  <p>
+    So, we can be in either a sleepy state or a wide-awake state. Let this be denoted as the following:
+
+    \( S = \{ sleepy, awake \}\).
+
+    Further, we can take the following consumption actions:
+    \( A = \{ Walnuts, Turkey, Rice, Coffee\}\).
+
+    Now, let's denote the chances of us transferring from a sleepy state to an awake state be the following:
+    \( P(s | a) \), where \( a \in A \text{ and }  s \in S \).
+
+    Essentially, we need to learn a policy such that given our sleepy state, which action to take in order to to stay awake (i.e., our reward). Here, the policy is nothing but the probability to take a particular action in a given state i.e., \( \pi(s, a)\) is the probability of taking action \(a\) in state \( s\).
+  </p>
+
+  <p>
+    Now, we can define the value function as the following:
+
+    $$ V^{\pi}(s) = \mathbb{E}\{r_{t+1} + \gamma r_{t+2} + \gamma^{2}r_{t+3} + \dots | s_t = s, \pi\}$$
+
+    The intuition behind the above equation is that if a particular policy \(\pi\) is followed, the cumulative discounted reward would be \(V^{\pi}(s)\). Here, \(V^{\pi}(s)\) is also known as the value of \(s\) under the policy \( \pi \).
+  </p>
+
+  <p>
+    Now, we have the tools to define the problem statement: What is the optimal policy, i.e., policy, \( \pi^{*}\) such that the \(V^{\pi^{*}}(s)\) is maximized \(\forall s \in S\).
+  </p>
+
+  <p>
+    Let's try to decompose the value function a little bit:
+
+    $$ V^{\pi}(s) = \mathbb{E}[\sum_{k=0} \gamma^{k}r_{t+k+1} | s_t = s, \pi]$$
+
+    This can be further broken down into the the one step look ahead and all possible combinations of the sequence.
+
+    $$ V^{\pi}(s) = \mathbb{E}[r_{t+1} + \sum_{k=1} \gamma^{k}r_{t+k+1} | s_t = s, \pi]$$.
+
+    Now, we know that the expectation can be stated as the following:
+
+    $$ V^{\pi}(s) = \sum_{a \in A} \pi(s, a)R(s, a) + \pi(s, a) \gamma \sum_{s^{'} \in S}P(s'|s, a)V^{\pi}(s')$$.
+
+    The above is the famous Bellman Equation.
+  </p>
+
+
+  <p>
+    Further, just the way assigned a value to a state, we can assign a value to an action-value pair \( (s, a)\). This value is defined as the following:
+
+    $$ Q^{\pi}(s, a) = \mathbb{E}\{r_{t+1} + \gamma r_{t+2} + \dots | s_{t} = s, a_{t} = a, \pi\}$$
+  </p>
+
+  <p>
+    Now, we can do a similar expansion as above to get the following:
+
+    $$ Q^{*}(s, a) = R(s, a) + \gamma \sum_{s' \in S}P(s'|s, a) max_{a' \in A_{s'}}Q^{*}(s', a')$$
+  </p>
+
+  <p>
+    Value Function Approximation: As an example DP algorithm we consider value iteration. This iterative update is also known as backup because we are approximating the value of the currents tate by backing up information from possible successor states.
+
+    $$V_{k+1}(s) = max_{a \in A_s}[R(s, a) + \gamma \sum_{s' \in S} P(s'|s, a) V_{k}(s')]$$.
+
+    Similarly, we can approximate the Q value function by using iterative backup updates:
+
+    $$Q_{k+1}(s, a) = R(s, a) + \gamma \sum_{s' \in S} P(s'|s, a) max_{a' \in A_{s'}}Q_{k}(s', a')$$
+  </p>
+
+  <p>
+    The following snippet is an example of policy evaluation using the aforementioned iterative backups method.
+
+    <script src="https://gist.github.com/rishabhranawat/7260ccd61c88b324fabfad573f710abf.js"></script>
+  </p>
+
+</div>
+
+
+
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2013/12/28/introducing-hyde/">
+            Introducing Hyde
+            <small>28 Dec 2013</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2012/02/07/example-content/">
+            Example content
+            <small>07 Feb 2012</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

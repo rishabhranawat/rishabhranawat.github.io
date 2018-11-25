@@ -1,0 +1,10 @@
+MCTS rests on two fundamental concetps:
+
+1. The true value of an action may be approximated using random simulation
+
+2. These values may be used efficiently to adjust the policy towards a best-first strategy.
+
+The basic algorithm involves iteratively building a search tree until some predefined computational budget - typically a time, memory or iteration constraint - is reached, at which point the search is halted adn the best performing root action returned.
+
+Each node in the search tree represents a state of the domain, and directed links to child nodes represent actions leading to subsequent states.
+

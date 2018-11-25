@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+	
+	  Writing to Learn
+	
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+								 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script> 
+	  $(function(){
+		$("#includedContent").load("policy_evaluation.html"); 
+	  });
+	  </script> 
+</head>
+
+
+  <body>
+
+	<div class="sidebar">
+  <div class="container sidebar-sticky">
+	<div class="sidebar-about">
+	  <p class="lead">Rish's Blog</p>
+	</div>
+
+	<nav class="sidebar-nav">
+	  <a class="sidebar-nav-item" href="/">Home</a>
+		<a class="sidebar-nav-item" href="/about/">About</a>
+		<a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a>
+	  <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a>
+	  <span class="sidebar-nav-item">Currently v2.1.0</span>
+	</nav>
+	<p>&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+	<div class="content container">
+	  <div class="post">
+  <h1 class="post-title">Personalized Thread Recommendations on MOOCs</h1>
+  <span class="post-date">22 July 2018</span>
+
+  <blockquote>This is a reading of the paper - "Personalized Thread
+	Recommendation for MOOC Discussion Forums" by Andrew Lan</blockquote>
+
+  <h3>Point Processes</h3>
+  <p>
+	A point process, the discretization of a Poisson process, is characterized by a rate function \( \lambda(t) \) that models the probability that an event will happen in an infinitesimal time window \( dt \).
+
+	The rate function at time \( t \) is given by:
+
+	$$ \lambda(t) = \mathbb{P}(\text{event in} [t, t + dt]) = \lim_{dt \rightarrow 0} \frac{N(t + dt) - N(t)}{dt}$$.
+
+	Where, \( N(t)\) denotes the number of events up to time $t$. Assuming the time period of interest is \( [0, T)\), the likelihood of a series of events at times \( t_1, \dots, t_N \le T\) is given b:
+
+	$$ \mathcal{L}(\{ t_i\}^{N}_{i=1}) = (\prod_{i=1}^{N} \lambda(t_i)) \exp^{- \int_{0}^{T} \lambda(\tau) d\tau}$$
+
+	Here, we care about rate functions that are affected by excitations of past events (e.g., forum posts in the same thread). This leads us to Hawkes processes, which characterize the rate function at time \( t\) given a series of past events at \( t_1, \dots, t_N \le t \) as:
+
+	$$ \lambda(t) = \mu + a \sum_{i=1}^{N'} \kappa(t - t_i)$$
+  </p>
+
+</div>
+
+
+
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+	
+	  <li>
+		<h3>
+		  <a href="/2013/12/28/introducing-hyde/">
+			Introducing Hyde
+			<small>28 Dec 2013</small>
+		  </a>
+		</h3>
+	  </li>
+	
+	  <li>
+		<h3>
+		  <a href="/2012/02/07/example-content/">
+			Example content
+			<small>07 Feb 2012</small>
+		  </a>
+		</h3>
+	  </li>
+	
+  </ul>
+</div>
+
+	</div>
+
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+	
+	  Writing to Learn
+	
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+								 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script> 
+	  $(function(){
+		$("#includedContent").load("policy_evaluation.html"); 
+	  });
+	  </script> 
+</head>
+
+
+  <body>
+
+	<div class="sidebar">
+  <div class="container sidebar-sticky">
+	<div class="sidebar-about">
+	  <p class="lead">Rish's Blog</p>
+	</div>
+
+	<nav class="sidebar-nav">
+	  <a class="sidebar-nav-item" href="/">Home</a>
+		<a class="sidebar-nav-item" href="/about/">About</a>
+		<a class="sidebar-nav-item" href="https://github.com/poole/hyde/archive/v2.1.0.zip">Download</a>
+	  <a class="sidebar-nav-item" href="https://github.com/poole/hyde">GitHub project</a>
+	  <span class="sidebar-nav-item">Currently v2.1.0</span>
+	</nav>
+	<p>&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+	<div class="content container">
+	  <div class="post">
+  <h1 class="post-title"></h1>
+  <span class="post-date">18th August 2018</span>
+
+<blockquote>Combining Adaptivity with Progression Ordering for Intelligent Tutoring Systems</blockquote>
+
+Problems with current LAS systems:
+<ul>
+	<li>LAS systems rely on an expert instructor or team of instructors to create high quality content and order such content into an effective learning sequence for the students.</li>
+
+	<li></li>
+</ul> 
+
+
+Bayesian Knowledge Tracing (BKT)
+
+Recent work on automatically providing personalized student advancement through such a curriculum graph using concepts of a zone of proximal development and multi-armed bandits.
+
+<br></br>
+
+<h3>Organizing Vocabulary Knowledge</h3>
+
+A sentence s1 is harder than another sentence s2, indicated as s1 > s2 if s1 covers all the vocabulary words in s2. A sentence s1 is directly harder than s2 if s1 > s2 and there does not exist a third sentence such that s1 > s3 > s2.
+
+Create a graph in which each node represents a sentence in our corpus and each directed edge represents a directly harder than relation between two nodes.
+
+
+<h3>Progessing Students Using Multi-Armed Bandits</h3>
+ZPDES algorithm proposed by Clement et al. for using multi-armed bandits for problem selection.
+
+<br></br>
+
+Given a curriculum graph, for each node in the graph, the algorithm keeps track of a belief state of student mastery, mastered or unmastered. 
+
+At each timestep, the algorithm selects a problem from within the set of problems on the boundary of the student's knowledge, which is defined as the Zone of Proximal Development (ZPD). 
+
+The algorithm selects the problem from this set that it predicts will give the most reward, which is measured in terms of student learning progress.
+
+<blockquote>ZPD Algo</blockquote>
+
+The prerequisites of a node is the set of all nodes that have a directed edge towards that node. On initialization, all problems start in the non-learned knowledge state and start with an initial un-normalized weight w_a = w_i. The belief ZPD is initialized to the set of problems that have no prerequisites.
+
+To select the next problem, the weights \( w_a \) of the problems in the ZPD are normalized \( w_{a, n}\) to ensure a proper probability distribution \( p_a \) over the problems:
+
+$$ w_{a, n} = \frac{w_a}{\sum_{a' \in ZPD} w_{a'}}$$
+
+
+Once a problem, problem a, is selected and presented to the student, the correctness of the student answer is recorded as \(C_{a, i}\) where \(i\) represents it is the \( i^{th}\) time problem \( a\) has been presented. The reward (r_{a, i}) of problem a at this timestep is calculated by the approximated gradient of the performance of the student on that problem and this 
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+	
+	  <li>
+		<h3>
+		  <a href="/2013/12/28/introducing-hyde/">
+			Introducing Hyde
+			<small>28 Dec 2013</small>
+		  </a>
+		</h3>
+	  </li>
+	
+	  <li>
+		<h3>
+		  <a href="/2012/02/07/example-content/">
+			Example content
+			<small>07 Feb 2012</small>
+		  </a>
+		</h3>
+	  </li>
+	
+  </ul>
+</div>
+
+	</div>
+
+  </body>
+</html>
