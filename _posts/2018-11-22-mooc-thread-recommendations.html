@@ -1,0 +1,34 @@
+
+  <!-- RSS -->
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+  </script>
+
+
+
+
+<div class="post">
+
+  <blockquote>This is a reading of the paper - "Personalized Thread
+	Recommendation for MOOC Discussion Forums" by Andrew Lan</blockquote>
+
+  <h3>Point Processes</h3>
+  <p>
+	A point process, the discretization of a Poisson process, is characterized by a rate function \( \lambda(t) \) that models the probability that an event will happen in an infinitesimal time window \( dt \).
+
+	The rate function at time \( t \) is given by:
+
+	$$ \lambda(t) = \mathbb{P}(\text{event in} [t, t + dt]) = \lim_{dt \rightarrow 0} \frac{N(t + dt) - N(t)}{dt}$$.
+
+	Where, \( N(t)\) denotes the number of events up to time $t$. Assuming the time period of interest is \( [0, T)\), the likelihood of a series of events at times \( t_1, \dots, t_N \le T\) is given b:
+
+	$$ \mathcal{L}(\{ t_i\}^{N}_{i=1}) = (\prod_{i=1}^{N} \lambda(t_i)) \exp^{- \int_{0}^{T} \lambda(\tau) d\tau}$$
+
+	Here, we care about rate functions that are affected by excitations of past events (e.g., forum posts in the same thread). This leads us to Hawkes processes, which characterize the rate function at time \( t\) given a series of past events at \( t_1, \dots, t_N \le t \) as:
+
+	$$ \lambda(t) = \mu + a \sum_{i=1}^{N'} \kappa(t - t_i)$$
+  </p>
+
+</div>
+
+
+

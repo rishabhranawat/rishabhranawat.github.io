@@ -7,16 +7,16 @@ permalink:        pretty
 
 
 # Setup
-title:            
-tagline:          'Write to Learn'
-description:      'Thoughts as I read through material.'
-baseurl:          ''
+title:            ''
+tagline:          ''
+description:      'Rishabh Ranawat. Keeping track of what I read/learn.'
+baseurl:          '/'
 
 author:
   name:           'Rishabh Ranawat'
-  url:            https://twitter.com/mdo
+  url:            https://twitter.com/rishabhranawat
 
-paginate:         5
+paginate:         1
 
 # Custom vars
 version:          2.1.0
