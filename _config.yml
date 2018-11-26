@@ -10,7 +10,7 @@ permalink:        pretty
 title:            ''
 tagline:          ''
 description:      'Rishabh Ranawat. Keeping track of what I read/learn.'
-baseurl:          '/'
+baseurl:          '/blog/'
 
 author:
   name:           'Rishabh Ranawat'
