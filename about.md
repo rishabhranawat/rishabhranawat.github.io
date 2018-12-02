@@ -4,27 +4,21 @@ title: About
 ---
 
 <p class="message">
-	Hey there, I am Rishabh!
+	Hi, I am Rishabh. Currently, I am a Software Engineer at <a href="https://www.goldmansachs.com/">Goldman Sachs</a> in New York City. I graduated from New York Universtiy in May 2018 where I studied <a href="https://cims.nyu.edu/">Math and Computer Science </a>, did <a href="">research</a>, worked on a bunch of <a href="">projects</a>, <a href="">tutored</a> and participated in a few competitions.
 </p>
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+I use this space to:
 
-There are currently two themes built on Poole:
+* keep track of papers I read (these days reinforcement learning related)
+* programming
+* mathematical finance (exploring this) 
+* ... and just things I am trying to learn.
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
-
-Learn more and contribute on [GitHub](https://github.com/poole).
-
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
+Feel free to reach out to me if you have any questions at either of the following:
+* ranawat dot rishabh at gmail dot com
+* rdr324 at nyu dot edu
 
 Thanks for reading!
+
+This website was made using <a href="http://hyde.getpoole.com/">Hyde</a>.
+
