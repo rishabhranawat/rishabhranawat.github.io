@@ -4,7 +4,7 @@ title: About
 ---
 
 <p class="message">
-	Hi, I am Rishabh. Currently, I am a Software Engineer at <a href="https://www.goldmansachs.com/">Goldman Sachs</a> in New York City. I graduated from New York Universtiy in May 2018 where I studied <a href="https://cims.nyu.edu/">Math and Computer Science </a>, did <a href="">research</a>, worked on a bunch of <a href="">projects</a>, <a href="">tutored</a> and participated in a few competitions.
+	Hi, I am Rishabh. Currently, I am a Software Engineer at <a href="https://www.goldmansachs.com/">Goldman Sachs</a> in New York City. I graduated from New York Universtiy in May 2018 where I took some great <a href="https://cims.nyu.edu/">Math and Computer Science </a> classes, did <a href="{{ site.baseurl }}/research/">research</a>, worked on <a href="{{ site.baseurl }}/projects/">projects</a>, tutored/TA'ed and tried a bunch of things.
 </p>
 
 I use this space to:
