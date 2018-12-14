@@ -4,7 +4,7 @@ title: Research
 ---
 
 <p class="message">
-	My research interests are in reinforcement learning, information retrieval and computing for development. 	
+	My research interests are in reinforcement learning, information retrieval and personalized learning. 	
 </p>
 
 
