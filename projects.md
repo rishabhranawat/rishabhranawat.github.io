@@ -19,7 +19,6 @@ with Arvi Gjoka and Yun Bin Zhang <br>
 with Shivaditya Sinha <br>
 <p class="message">
 	In this project, we worked on a various small-scale data driven informal research projects. 
-
 	<a href="https://github.com/rishabhranawat/BetweenTheLines"> Code </a> and articles: <br>
 	<ul> <a href="https://extranewsfeed.com/what-does-twitter-have-to-say-about-trumps-executive-order-on-immigration-602f45eeef32">What does Twitter have to say about Trump's Executive Order on Immigration?</a></ul>
 	<ul><a href="https://www.google.com/search?q=nyu+economics+review+rishabh+ranawat&oq=nyu+economics+review+r&aqs=chrome.1.69i57j69i59.3935j0j7&sourceid=chrome&ie=UTF-8"> The Video War – A Rising Facebook Challenges YouTube’s Dominance </a></ul>
