@@ -1,0 +1,24 @@
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+  </script>
+
+
+<div class="post">
+
+<p> We read the DQN paper - Playing Atari with Deep Reinforcement Learning by Min et. al and a variation of the DQN algorithm, DQRN - Deep Recurrent Q-Learning for Partially Observable MDPs - by Hausknecht & Stone. </p>
+
+<p> Here is an annotated version of the paper with some useful side notes and external references <a href="{{site.baseurl}}/public/papers/dqn.pdf"> DQN </a> and <a href="{{site.baseurl}}/public/papers/dqrn.pdf">DQRN</a>. </p>
+
+<p>
+	Some of the questions that came up while discussing these papers:
+
+	<ul>
+		<li>How does the \(\gamma \) affect the policy that is learnt? Also, is there an optimal \(\gamma \) for every particular game? </li>
+
+		<li>Further, how does one decide on the correct in a more strategic game like Dota versus in Cartpole. The main argument being that in cartpole, you always want to give your immediate rewards a lot of weight given the nature of the game. However, in a more strategic game, that is not necessarily the case.</li>
+	</ul>
+</p>
+
+
+<p> Here's a cartpole demo with  help from external implementations  <a href="{{site.baseurl}}/public/code/dqn.py">here</a>. I have added some experiments surrounding the questions that came up during the reading group.</p>
+
+</div>
