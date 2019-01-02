@@ -23,26 +23,24 @@ class Actor:
 		self.learning_rate = learning_rate
 		self.network = self.network()
 
-	def custom_negative_log_loss(state, actual_action_prob, target):
-		return -1*keras.backend.log(actual_action_prob) * target
+	def custom_negative_log_loss(state, y_pred, y_target):
+		return -1*keras.backend.log(np.max(y_pred)) * y_target
 
 	def network(self):
 		model = Sequential()
-
 		model.add(Dense(24, input_dim=self.state_size, activation='relu'))
 		model.add(Dense(24, activation='relu'))
-		model.add(Dense(self.action_size, activation='linear'))
+		model.add(Dense(self.action_size, activation='softmax'))
 		model.compile(loss=self.custom_negative_log_loss, optimizer=Adam(lr=self.learning_rate))
 
 		return model
 
 	def act(self, state):
 		actions = self.network.predict(state)
-		action = np.argmax(actions[0])
-		return action, actions[0][action]
+		return actions
 
-	def update(self, state, target, action_prob):
-		self.network.fit(state, action_prob, target, epochs=1, verbose=0)
+	def update(self, state, target):
+		self.network.fit(state, target, verbose=0)
 		
 
 '''
@@ -61,18 +59,22 @@ class Critic:
 
 		self.network = self.network()
 
+	def custom_mse(state, y_pred, y_target):
+		loss = keras.losses.mean_squared_error(y_pred, y_target)
+		return loss
+
 	def network(self):
 		model = Sequential()
 		model.add(Dense(1, input_dim=self.state_size))
-		model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+		model.compile(loss=self.custom_mse, optimizer=Adam(lr=self.learning_rate))
 		return model
 
 	def act(self, state):
 		expected_to_go_reward = self.network.predict(state)
 		return expected_to_go_reward
 
-	def update(self, value_estimate, target):
-		self.network.fit(value_estimate, target, epochs=1, verbose=0)
+	def update(self, state, target):
+		self.network.fit(state, target, verbose=0)
 
 class ActorCritic:
 
@@ -90,7 +92,7 @@ def get_one_hot_state(state, state_size):
 
 
 if __name__ == "__main__":
-	EPISODES = 1000
+	EPISODES = 100
 	BATCH_SAMPLES = 100
 	TIME_STEPS = 1000
 
@@ -100,7 +102,7 @@ if __name__ == "__main__":
 	action_size = env.action_space.n
 
 	# agent initializations
-	ac = ActorCritic(state_size, action_size, 0.95)
+	ac = ActorCritic(state_size, action_size, 0.01)
 
 	for each_episode in range(EPISODES):
 		state = env.reset()
@@ -109,24 +111,24 @@ if __name__ == "__main__":
 		for each_time_step in range(TIME_STEPS):
 			state = np.reshape(state, [1, state_size])
 			
-			action, action_prob = ac.actor.act(state)
-			next_state, reward, done, _ = env.step(action)
+			actions = ac.actor.act(state)
+			next_state, reward, done, _ = env.step(np.argmax(actions))
 			
-			next_state = np.reshape(state, [1, state_size])
+			next_state = np.reshape(next_state, [1, state_size])
 
 			critic_evaluation_state = ac.critic.act(state)
 			critic_evaluation_next_state = ac.critic.act(next_state)
 
 			# update the critic (policy evaluator)
-			ac.critic.update(critic_evaluation_state, reward)
+			ac.critic.update(state, np.reshape(reward, (1, 1)))
 
 			# evaluating the advantage function
-			advantage = reward + critic_evaluation_next_state - critic_evaluation_state
+			advantage = reward + critic_evaluation_next_state[0][0] - critic_evaluation_state[0][0]
 
-			ac.actor.update(state, advantage, action_prob)
+			ac.actor.update(state, np.reshape(advantage, (1, 1)))
 			
 			if(done):
-				print("epsiode: {}/{}, score:{}, e:{:.2}" .format(each_episode, EPSIODES, each_time_step))
+				print("epsiode: {}/{}, score:{}" .format(each_episode, EPISODES, each_time_step))
 				break
 
 			state = next_state
