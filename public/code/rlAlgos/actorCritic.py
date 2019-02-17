@@ -85,15 +85,9 @@ class ActorCritic:
 		self.actor = actor
 		self.critic = critic
 
-
-
-def get_one_hot_state(state, state_size):
-	return keras.backend.one_hot(state, state_size)
-
-
 if __name__ == "__main__":
 	EPISODES = 100
-	BATCH_SAMPLES = 100
+	BATCH_SAMPLES = 10
 	TIME_STEPS = 1000
 
 	# env initializations
@@ -111,21 +105,34 @@ if __name__ == "__main__":
 		for each_time_step in range(TIME_STEPS):
 			state = np.reshape(state, [1, state_size])
 			
-			actions = ac.actor.act(state)
-			next_state, reward, done, _ = env.step(np.argmax(actions))
+			original_state = state
 			
+			advantage = 0.0
+			one_step_look = 0.0
+			for each_batch_step in range(BATCH_SAMPLES):
+
+				actions = ac.actor.act(state)
+				next_state, reward, done, _ = env.step(np.argmax(actions))
+				
+				next_state = np.reshape(next_state, [1, state_size])
+
+				critic_evaluation_state = ac.critic.act(state)
+				critic_evaluation_next_state = ac.critic.act(next_state)
+
+				advantage += reward + 0.9*critic_evaluation_next_state[0][0] - critic_evaluation_state[0][0]
+				
+				# evaluating the advantage function
+				one_step_look += reward + 0.9*critic_evaluation_state[0][0]
+
+				state = next_state
+
+			next_state, reward, done, _ = env.step(np.argmax(actions))
+
 			next_state = np.reshape(next_state, [1, state_size])
 
-			critic_evaluation_state = ac.critic.act(state)
-			critic_evaluation_next_state = ac.critic.act(next_state)
-
-			# update the critic (policy evaluator)
-			ac.critic.update(state, np.reshape(reward, (1, 1)))
-
-			# evaluating the advantage function
-			advantage = reward + critic_evaluation_next_state[0][0] - critic_evaluation_state[0][0]
-
-			ac.actor.update(state, np.reshape(advantage, (1, 1)))
+			# update the actor and the critic
+			ac.critic.update(original_state, np.reshape(one_step_look, (1, 1)))
+			ac.actor.update(original_state, np.reshape(advantage, (1, 1)))
 			
 			if(done):
 				print("epsiode: {}/{}, score:{}" .format(each_episode, EPISODES, each_time_step))
