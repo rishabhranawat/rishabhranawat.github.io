@@ -1,0 +1,46 @@
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+  </script>
+
+
+<div class="post">
+
+This is a reading of Program2Tutor by Tongu Mu, Karan Goel and Emma Brunskill.
+
+Problem:
+Determining topic relationships and statistical student learning modeling is a comlpex process.
+
+Prior Work: 
+1. Prerequisite or knowledge graph of the related matericl can be automatically constructed given an algorithmic representation of the underlying material.
+
+2. How to automatically progress a student through a knowledge graph with minimal assumptions about a model of the underlying student learning process.
+
+Contribution:
+1. Preliminary work on uniting the idea of automatically generating a knowledge graph and progressing a student while learning.
+
+2. Novel approach for identifying the initial background knowledge of the learner.
+
+In this work, the authors unify the ideas of automatic curriculum generation from execution traces and automatic problem selection using reinforcement learning techniques.
+
+Specifically, they use multi-armed bandit algorithm for problem selection (ZPDES) as it is less reliant than other methods on the underlying student learning model which can be advantageous.
+
+Additionally, the authors build on prior work in probabilistically detecting the knowledge boundary of the student and present a novel approach to determine the initial knowledge state of the student within the curriculum.
+
+
+<bold>Automatic Curriculum Generation from Execution Traces</bold>
+
+Let \( n \) be any positive integer. We say that a trace \( T_{1}\) is at least as complex as trace \( T_{2} \) if every n-gram of trace \( T_{2} \) is also present in trace \( T_{1}\).
+
+<bold>Progressing Students Using Multi-Armed Bandits</bold>
+
+This algorithm at each timestep selects a problem from within the set of problem types on the boundary of the student's knowledge, or the ZPD, that it predicts will give the most most reward, which is measured in terms of student learning progress.
+
+On initialization, all problems start with an initial unnormalized weight \( w_{a} = w_{i}\). The weights are normalized to ensure a proper probability distribution:
+
+
+
+
+<bold>References</bold>
+
+B. Clement, D. Roy, P.-Y. Oudeyer, and M. Lopes. Multi-armed bandits for intelligent tutoring systems. JEDM-Journal of Educational Data Mining, 7(n), 2015.
+
+</div>
