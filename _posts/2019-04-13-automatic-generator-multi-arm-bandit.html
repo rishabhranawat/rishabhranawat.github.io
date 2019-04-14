@@ -36,8 +36,9 @@ This algorithm at each timestep selects a problem from within the set of problem
 
 On initialization, all problems start with an initial unnormalized weight \( w_{a} = w_{i}\). The weights are normalized to ensure a proper probability distribution:
 
+The weights of the problems \( w_{a}\) in the ZPD are normalized and denoted as \( w_{a}^{n} \) and with probability \( p_{a} = w_{a}^{n}(1 - \gamma) + \gamma \frac{1}{|ZPD|}\), where \( a \in ZPD\).
 
-
+Once a problem is selected, it is presented to the student and correctness of the student answer for the \( i^{th}\) time the problem is presented is recorded as \( C_{i}\).
 
 <bold>References</bold>
 
