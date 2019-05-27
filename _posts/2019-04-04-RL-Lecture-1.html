@@ -1,0 +1,62 @@
+Reinforcement Learning - Lecture 1 - Emma Brunskill
+
+Learning to make good sequential decisions
+
+Learning to make good decisions -- some notion of optimiality/utilty measure of the decisions being made.
+
+Making good decisions under uncertainty
+
+Delayed consequences
+
+When planning: decisions involve resasoning about not just immediate benefit of a decision but also its longer term ramifications.
+
+When learning: temporarl credit assignment is hard (what caused later high or low rewards?)
+
+Policy is mapping from past experience to action
+
+RL
+Optimization
+Exploration
+Generalization
+Delayed Consequences
+
+Supervised Learning is typically making 1 decision instead of a sequence of decisions.
+
+Imitation Learning
+Optimization/Generalization/Delayed Consequences
+Learns from experience of others
+Assumes input demos of good policies
+
+Imitation  + Reinforcement Learning seems promising
+
+// How do we proceed?
+
+1. Explore the world/use experience to guide future decisions
+
+Questions:
+1. Where do these rewards come from?
+	a. What happens if we get the wrong kind of rewards
+2. Robustness/Risk sensititvity
+
+
+<bold>Sequential Decision Making Under Uncertainty</bold>
+
+Maximize the total expected future reward (the world is stochastic so the agent will be maximizing rewards in expectation)
+
+Teaching agent -- choose a teaching activity -- reward is the student's performance on that particular activity.
+
+Machine Teaching -- where the environment is aware that the agent is trying to teach them something and thus, acts in a cooperative way. This could in an adverserial way as well.
+
+The famous Markov assumption -- sufficient statistic of history
+
+State $$s_t$$ is Markov if and only if: $$p(s_{t+1} | s_t, a_t) = p(s_{t+1} | h_{t}, a_{t})$$
+
+
+Finite horizon vs. Inifinite horizon
+
+Stationary vs. Non-stationary
+
+
+
+
+
