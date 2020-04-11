@@ -1,0 +1,19 @@
+deep neural networks are extremely powerful machine learning models that achieve excellent perfomance on difficult problems.
+
+If there exists a parameter setting of a large DNN that achieves good results, supervised backpropagation will find these parameters and solve the problem.
+
+Many important problems are best expressed with sequences whose lengths are not known a-priori. For example, speec recognition and machine translation are sequential problems. Likewise, question-answering can also be seen as mapping a sequence of words representing the question to a sequence of words representing the answer. It is therefore clear that a domain-independent method that learns to map sequences to sequences would be useful.
+
+In this paper, the authors show that a straighforward application of LSTM architecture can solve general sequence to sequence problems.
+
+The idea is to use one LSTM to read the input sequence, one timestep at a time, to obtain a large fixed dimensional vector representation, and then to use another LSTM to extract the output sequence from that vector. The second LSTM is essentially a recurrent neural network language model except that it is conditioned on the input sequence.
+
+
+Related to
+[18] N. Kalchbrenner and P. Blunsom. Recurrent continuous translation models. In EMNLP, 2013.
+
+and is similar to
+K.Cho,B.Merrienboer,C.Gulcehre,F.Bougares,H.Schwenk,andY.Bengio.Learningphraserepresen- tations using RNN encoder-decoder for statistical machine translation. In Arxiv preprint arXiv:1406.1078, 2014.
+
+A useful property of the LSTM is that it learns to map an input sequence of variable length into a fixed dimensional vector representation.
+
