@@ -1,0 +1,80 @@
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<div class="post">
+
+<p> 
+	<strong>Paper</strong>: FaceNet A Unified Embedding for Face Recognition and Clustering <br>
+	<strong>Authors</strong>: Florian Schroff (Google), Dimitry Kalenichenko (Google) and James Philbin (Google)  <br>
+	<strong>Area</strong>: Computer Vision, Clustering, Classification, Deep Learning  <br>
+	<strong>Year</strong>: 2015  <br>
+	<a href="{{site.baseurl}}/public/papers/face_net.pdf">Highlighted Paper</a>
+</p>
+
+<p>
+	<strong>Background</strong>:
+	<li>
+		Euclidean space, distance and vector norms
+	</li>
+	<li>
+		Nearest neighbor/k-means/clustering
+	</li>
+	<li>
+		CNNs: 
+		<a href="https://cs231n.github.io/convolutional-networks/">Stanford's CS231N course notes</a>, 
+		<a href="https://www.deeplearningbook.org/contents/convnets.html">Deep learning book chapter 9</a>
+	</li>
+	<li>
+		Important architectures for this paper:
+		<ol>
+			<li><a href="https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf">Zeiler&Fergus</a></li>
+			<li><a href="https://arxiv.org/pdf/1409.4842.pdf">Google LeNet Inception Model</a></li>
+		</ol>
+	</li>
+</p>
+
+<p>
+	<strong>Key Contributions</strong>:
+	<ol>
+		<li>Learns a mapping from face images to a compact Euclidean space where distances directly correspond to measure of face similarity. The method uses a CNN to directly optimize the embedding itself.</li>
+
+		<li>To train - use triplets of roughly aligned matching/non-matching face patches generated using an online triplet mining method.</li>
+	</ol>
+</p>
+
+<p>
+	<strong>Why is this novel?</strong>
+	Unlike previous approaches where a final classification layer is used to predict the class, here we are leaning an embedding which can then be used for various classification purposes.
+</p>
+
+<p>
+<strong>Model</strong>
+<strong>Triplet Loss:</strong> <br>
+$$\sum_{i}^{N}[\lVert f(x_{i}^{a}) - f(x_{i}^{p}) \rVert_{2}^{2} - \lVert f(x_{i}^{a}) - f(x_{i}^{n}) \rVert_{2}^{2} + \alpha)]$$
+
+\(a\) is the anchor, \(p\) is a positive and \(n\) is a negative. You essentially want to optimize for making the positive closer to the anchor than the negative. <br><br>
+
+<strong>Triplet Selection:</strong> <br>
+We focus on the online generation and use large mini-batches in the order of a few thousand exemplars and only compute the \(argmin\) and \(argmax\) within that mini-batch. <br><br>
+
+<strong>CNN Architecturse:</strong> <br>
+Existing architectures - Inception model and the Zeiler&Fergus model.
+
+</p>
+
+
+<p>
+	<strong>Some implementations</strong>: <br>
+	<a href="https://github.com/tbmoon/facenet"> tbmoon's implementation using PyTorch </a><br>
+	<a href="https://github.com/timesler/facenet-pytorch"> timseler's implementation </a>
+</p>
+
+
+<p>
+	<strong>Datasets</strong><br>
+	<a href="http://vis-www.cs.umass.edu/lfw/#download">Labeled Faces in the Wild (LFW) courtsey of UMass</a>
+	<br>
+	<a href="https://www.cs.tau.ac.il/~wolf/ytfaces/index.html#download"> YouTube Faces DB </a>
+</p>
+
+</p>
