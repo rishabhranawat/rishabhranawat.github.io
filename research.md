@@ -11,7 +11,7 @@ title: Research
 
 1. <a href="https://dl.acm.org/doi/abs/10.1145/3460112.3471938"><strong>CollectiveTeach: A System To Generate And Sequence Web-Annotated Lesson Plans</strong></a><br>
 <strong>R. Ranawat</strong>, A. Venkataraman, L. Subramanian<br>
-<em>ACM Conference on Learning at Scale (L@S), 2021</em>
+<em>ACM SIGCAS Conference on Computing and Sustainable Societies (COMPASS), 2021</em>
 
 2. <a href="{{ site.baseurl }}/public/documents/icml_data_driven_student.pdf"><strong>Data-driven Probabilistic Framework for Student Learning</strong></a><br>
 A. Venkataraman, <strong>R. Ranawat</strong>, S. Iyer, S. Jagabathula, L. Subramanian<br>
