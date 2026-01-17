@@ -1,0 +1,73 @@
+---
+layout: post
+title: "DataRater: Meta-Learned Dataset Curation"
+---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<div class="post">
+
+<blockquote>Automatically learning which training data points are valuable</blockquote>
+
+<p>I recently open-sourced an implementation of <a href="https://github.com/rishabhranawat/DataRater">DataRater</a>, a meta-learning framework for automated dataset curation based on the <a href="https://arxiv.org/abs/2505.17895">paper</a> accepted at NeurIPS 2025.</p>
+
+<h3>The Problem</h3>
+
+<p>Foundation model quality depends heavily on training data quality. Current approaches to dataset curation rely on:</p>
+
+<ul>
+<li>Manual tuning of coarse-grained mixtures of large data buckets</li>
+<li>Filtering by hand-crafted heuristics</li>
+</ul>
+
+<p>These methods lack sophistication and don't scale well. What if we could learn which data points are valuable automatically?</p>
+
+<h3>The DataRater Approach</h3>
+
+<p>DataRater uses meta-learning to estimate the value of individual data points. The key insight is to use <strong>meta-gradients</strong>: optimizing data selection to improve performance on held-out validation data.</p>
+
+<p>The framework consists of three main components:</p>
+
+<ol>
+<li><strong>Inner Models</strong>: Task-specific neural networks that train on data weighted by DataRater scores</li>
+<li><strong>DataRater Model</strong>: A meta-learner that assigns quality scores to individual training samples</li>
+<li><strong>Meta-Training Loop</strong>: An iterative process alternating between inner model training and DataRater optimization</li>
+</ol>
+
+<h3>How It Works</h3>
+
+<p>During each meta-training iteration:</p>
+
+<ol>
+<li>DataRater assigns scores to training samples</li>
+<li>Scores are converted to sample weights using softmax normalization</li>
+<li>Inner models train on the reweighted data</li>
+<li>DataRater is optimized based on inner model performance on validation data</li>
+</ol>
+
+<p>The population management strategy maintains multiple inner models that are periodically refreshed, providing diverse gradients for DataRater optimization.</p>
+
+<h3>Results</h3>
+
+<p>Evaluating on corrupted MNIST data, filtering out the lowest 10% of samples based on DataRater scores achieved ~97.32% test accuracy versus 97.08% for baseline training. The system learns to identify and downweight corrupted or mislabeled samples without explicit supervision.</p>
+
+<h3>Key Benefits</h3>
+
+<ul>
+<li><strong>Fine-grained curation</strong>: Works at the individual data point level, not coarse buckets</li>
+<li><strong>Improved compute efficiency</strong>: Train on higher-quality subsets of data</li>
+<li><strong>Automated and scalable</strong>: No manual heuristic design required</li>
+</ul>
+
+<h3>Try It Out</h3>
+
+<p>The implementation is available at <a href="https://github.com/rishabhranawat/DataRater">github.com/rishabhranawat/DataRater</a>. Quick start:</p>
+
+<pre><code>pip install -r requirements.txt
+sh runbin/mnist_v1.sh
+</code></pre>
+
+<p>The codebase is designed to be extensible - you can register custom datasets and models through factory functions.</p>
+
+</div>

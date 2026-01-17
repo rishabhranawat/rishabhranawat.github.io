@@ -1,0 +1,83 @@
+---
+layout: post
+title: "DataMixer: A Library for Combining Datasets"
+---
+
+<div class="post">
+
+<blockquote>Flexible data mixing for machine learning pretraining</blockquote>
+
+<p>I've been working on <a href="https://github.com/rishabhranawat/DataMixer">DataMixer</a>, a Python library for combining multiple datasets using customizable algorithms. The goal is to provide a clean, modular framework for controlling dataset composition in ML training pipelines.</p>
+
+<h3>The Problem</h3>
+
+<p>When training large models, especially for multilingual or multi-domain applications, you often need to combine data from multiple sources. Key questions arise:</p>
+
+<ul>
+<li>How much should each dataset contribute to training?</li>
+<li>How do you balance between high-resource and low-resource domains?</li>
+<li>How do you prevent catastrophic forgetting of underrepresented categories?</li>
+</ul>
+
+<h3>Design Philosophy</h3>
+
+<p>DataMixer separates <strong>combination strategies</strong> from <strong>sampling logic</strong>. This makes it easy to:</p>
+
+<ul>
+<li>Swap in different mixing algorithms</li>
+<li>Compare approaches on the same data</li>
+<li>Add new methods without modifying core code</li>
+</ul>
+
+<h3>Supported Algorithms</h3>
+
+<p>The library currently implements two research-backed approaches:</p>
+
+<p><strong>UniMax</strong> (Chung et al., 2023)</p>
+<ul>
+<li>Designed for multilingual pretraining</li>
+<li>Provides fair and effective language sampling</li>
+<li>Caps maximum epochs per language to prevent overfitting on small datasets</li>
+</ul>
+
+<p><strong>UtiliMax</strong> (Held et al., 2025)</p>
+<ul>
+<li>Uses LLM-estimated utility scores</li>
+<li>Optimizes pretraining data mixtures based on downstream task performance</li>
+</ul>
+
+<h3>Usage</h3>
+
+<pre><code>from datamixer import DataMixer, UniMax
+
+mixer = DataMixer(
+    datasets=[dataset1, dataset2, dataset3],
+    algorithm=UniMax(
+        budget=6000,
+        seed=42,
+        max_epochs_per_language=2
+    )
+)
+
+mixer.mix()
+mixed_dataset = mixer.sample(
+    datasets=[...],
+    output_size=6000
+)
+
+# View dataset proportions
+print(mixer.proportions)
+</code></pre>
+
+<h3>Future Work</h3>
+
+<p>Planning to add:</p>
+<ul>
+<li>More mixing algorithms from recent research</li>
+<li>Integration with HuggingFace datasets</li>
+<li>Visualization tools for dataset composition</li>
+</ul>
+
+<p>Check out the project at <a href="https://github.com/rishabhranawat/DataMixer">github.com/rishabhranawat/DataMixer</a>.</p>
+
+</div>

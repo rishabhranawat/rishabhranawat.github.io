@@ -4,24 +4,15 @@ title: Research
 ---
 
 <p class="message">
-	My research interests are in reinforcement learning, information retrieval and personalized learning. 	
+	My research interests are in machine learning, data-centric AI, reinforcement learning, and personalized learning systems.
 </p>
-
 
 <h2>Publications</h2>
 
-1.<a href="{{ site.baseurl }}/public/documents/icml_data_driven_student.pdf"><strong> Data-driven Probabilistic Framework for Student Learning</strong><br></a>
+1. <a href="{{ site.baseurl }}/public/documents/icml_data_driven_student.pdf"><strong>Data-driven Probabilistic Framework for Student Learning</strong></a><br>
 A. Venkataraman, <strong>R. Ranawat</strong>, S. Iyer, S. Jagabathula, L. Subramanian<br>
-ICML/IJCAI Workshop on AI and Computational Psychology: Theories, Algorithms and Applications (CompPsy), July 2018
+<em>ICML/IJCAI Workshop on AI and Computational Psychology: Theories, Algorithms and Applications (CompPsy), July 2018</em>
 
-2.<a href="{{ site.baseurl }}/public/documents/kdd_collective_teach.pdf"><strong> CollectiveTeach: Crowdsourcing Lesson Plans</strong><br></a>
+2. <a href="{{ site.baseurl }}/public/documents/kdd_collective_teach.pdf"><strong>CollectiveTeach: Crowdsourcing Lesson Plans</strong></a><br>
 A. Venkataraman, <strong>R. Ranawat</strong>, S. Vakil, J. Chen, S. Jagabathula, L. Subramanian<br>
-KDD Workshop on Advancing Education with Data, August 2017<br>
-
-<h2>On Going Work</h2>
-
-3.<strong> CollectiveTeach: A System for Generating and Sequencing Lesson Plans</strong><br>
-<strong>R. Ranawat</strong>, A. Venkataraman and L. Subramanian
-In Submission at CSCL 2019
-
-4.<strong> A Deep Reinforcement Learning Approach to Lesson Plan Generation</strong>
+<em>KDD Workshop on Advancing Education with Data, August 2017</em>

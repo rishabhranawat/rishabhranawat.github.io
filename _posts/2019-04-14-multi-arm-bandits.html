@@ -1,21 +1,63 @@
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
-  </script>
+---
+layout: post
+title: Multi-Armed Bandits
+---
 
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
 
 <div class="post">
 
+<blockquote>Balancing exploration and exploitation in sequential decision making</blockquote>
 
-<p>
-<bold>Upper Confidence Bounds</bold>
-<br></br>
+<h3>The Problem</h3>
 
-The Upper Confidence Bounds (UCB) algorith measures this potential by an upper confidence bound of the reward value, \(\hat{U}_{t}(a)\), so that the true value is below with bound \(Q(a) \le \hat{Q}_{t}(a) + \hat{U}_{t}(a)\) with high probability.
+<p>Imagine you're in a casino with multiple slot machines (bandits), each with an unknown probability of payout. How do you maximize your total reward over time? You need to balance:</p>
 
-In UCB algorithm, we always select the greediest action to maximize the upper confidence bound:
+<ul>
+<li><strong>Exploration</strong>: Trying different machines to learn their payouts</li>
+<li><strong>Exploitation</strong>: Playing the machine you believe has the highest payout</li>
+</ul>
 
-\( a_{t}^{UCB} = argmax_{a \in A}\hat{Q_{t}(a) + \hat{U}_{t}(a)}\)
+<h3>Epsilon-Greedy</h3>
 
+<p>The simplest approach: with probability \(\epsilon\), explore randomly; otherwise, exploit the best known action.</p>
 
-</p>
+<ul>
+<li>Simple to implement</li>
+<li>Explores uniformly, even among clearly suboptimal actions</li>
+</ul>
+
+<h3>Upper Confidence Bounds (UCB)</h3>
+
+<p>UCB measures potential by an upper confidence bound of the reward value \(\hat{U}_{t}(a)\), so that the true value is below with high probability:</p>
+
+\[ Q(a) \le \hat{Q}_{t}(a) + \hat{U}_{t}(a) \]
+
+<p>The UCB algorithm always selects the action that maximizes this upper confidence bound:</p>
+
+\[ a_{t}^{UCB} = \arg\max_{a \in A} \left( \hat{Q}_{t}(a) + \hat{U}_{t}(a) \right) \]
+
+<p>The confidence bound \(\hat{U}_{t}(a)\) typically decreases as we observe more samples of action \(a\), following the principle of "optimism in the face of uncertainty."</p>
+
+<h3>Thompson Sampling</h3>
+
+<p>A Bayesian approach that maintains a probability distribution over the expected reward of each action:</p>
+
+<ol>
+<li>Sample a reward estimate from each action's posterior distribution</li>
+<li>Select the action with the highest sampled value</li>
+<li>Update the posterior based on the observed reward</li>
+</ol>
+
+<p>Thompson Sampling often achieves near-optimal regret bounds while being simple to implement.</p>
+
+<h3>Regret</h3>
+
+<p>We measure performance by <em>regret</em>: the difference between the reward we would have obtained by always playing the optimal action and what we actually received:</p>
+
+\[ R_T = T \cdot \mu^* - \sum_{t=1}^{T} r_t \]
+
+<p>where \(\mu^*\) is the expected reward of the best action.</p>
 
 </div>

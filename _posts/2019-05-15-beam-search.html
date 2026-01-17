@@ -1,7 +1,52 @@
-<p>Beam Search Algorithm: 
+---
+layout: post
+title: Beam Search Algorithm
+---
 
-Wiki details: Beam search uses breadth-first-search to build its search tree. At each level of the tree, it generates all successors of the states at the current level, sorting them in increasing order of heurisitc cost. However, it only explores a predetermined number, \( \Beta \), of best states at each level --> beam width. Only those states are expanded next. The greater the beam width, the fewer states are pruned.
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
 
-A beam search is most often used to maintain tractability in large systems with insufficient amount of memory to store the entire search tree.
+<div class="post">
 
-</p>
+<blockquote>A heuristic search algorithm for finding optimal sequences</blockquote>
+
+<h3>Overview</h3>
+
+<p>Beam search is a heuristic search algorithm commonly used in sequence-to-sequence models for tasks like machine translation, speech recognition, and text generation. It explores a graph by expanding the most promising nodes while keeping only a limited number of candidates at each level.</p>
+
+<h3>How It Works</h3>
+
+<p>Beam search uses breadth-first search to build its search tree. At each level:</p>
+
+<ol>
+<li>Generate all successors of the states at the current level</li>
+<li>Sort them in increasing order of heuristic cost</li>
+<li>Keep only the top \(\beta\) states (the beam width)</li>
+<li>Expand only those states in the next iteration</li>
+</ol>
+
+<p>The greater the beam width, the fewer states are pruned. With \(\beta = 1\), beam search becomes greedy search. With \(\beta = \infty\), it becomes exhaustive breadth-first search.</p>
+
+<h3>Why Use Beam Search?</h3>
+
+<p>Beam search maintains tractability in large systems with insufficient memory to store the entire search tree. It provides a balance between:</p>
+
+<ul>
+<li><strong>Greedy search</strong>: Fast but may miss optimal solutions</li>
+<li><strong>Exhaustive search</strong>: Optimal but computationally infeasible</li>
+</ul>
+
+<h3>Applications</h3>
+
+<ul>
+<li><strong>Neural Machine Translation</strong>: Finding the most likely translation</li>
+<li><strong>Speech Recognition</strong>: Decoding audio to text</li>
+<li><strong>Image Captioning</strong>: Generating descriptions for images</li>
+<li><strong>Text Generation</strong>: Producing coherent sequences in LLMs</li>
+</ul>
+
+<h3>Limitations</h3>
+
+<p>Beam search is not guaranteed to find the optimal solution since it prunes the search space. The choice of beam width \(\beta\) is a trade-off between search quality and computational cost.</p>
+
+</div>

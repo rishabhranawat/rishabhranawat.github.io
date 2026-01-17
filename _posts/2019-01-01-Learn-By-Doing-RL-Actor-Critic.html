@@ -1,18 +1,41 @@
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
-  </script>
+---
+layout: post
+title: "Actor-Critic Algorithms: Implementation Notes"
+---
 
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
 
 <div class="post">
 
-<blockquote> Implementing and Understanding Actor Critic Algorithms </blockquote>
+<blockquote>Implementing and understanding actor-critic algorithms</blockquote>
 
-<p> I was following Seregey Levine's <a href="http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf.pdf">lecture</a> and using the following pseudocode on page 19 to implement the algorithm:
+<h3>Overview</h3>
 
-<img src="{{site.baseurl}}/public/images/batch_actor_critic_levine.png"></img>
+<p>Actor-critic methods combine the benefits of policy gradient methods (the actor) with value function approximation (the critic). The actor learns a policy, while the critic evaluates states to reduce variance in policy gradient estimates.</p>
 
-</p>
+<h3>The Algorithm</h3>
 
-The code is <a href="{{site.baseurl}}/public/code/rlAlgos/actorCritic.py">here</a>. (unfinished)
+<p>Following Sergey Levine's <a href="http://rail.eecs.berkeley.edu/deeprlcourse-fa17/f17docs/lecture_5_actor_critic_pdf.pdf">lecture</a>, the batch actor-critic algorithm works as follows:</p>
 
+<img src="{{site.baseurl}}/public/images/batch_actor_critic_levine.png" alt="Batch Actor-Critic Algorithm">
+
+<h3>Key Components</h3>
+
+<p><strong>Actor</strong>: The policy network \(\pi_\theta(a|s)\) that maps states to action distributions.</p>
+
+<p><strong>Critic</strong>: The value network \(V_\phi(s)\) that estimates expected returns from a state.</p>
+
+<p><strong>Advantage</strong>: The advantage function \(A(s,a) = Q(s,a) - V(s)\) tells us how much better an action is compared to the average.</p>
+
+<h3>Why Actor-Critic?</h3>
+
+<ul>
+<li><strong>Lower variance</strong>: Using a learned baseline (critic) reduces variance compared to REINFORCE</li>
+<li><strong>Online learning</strong>: Can update after each step, not just at episode end</li>
+<li><strong>Continuous actions</strong>: Works well with continuous action spaces</li>
+</ul>
+
+<p>Implementation: <a href="{{site.baseurl}}/public/code/rlAlgos/actorCritic.py">actorCritic.py</a></p>
 
 </div>

@@ -1,62 +1,59 @@
-Reinforcement Learning - Lecture 1 - Emma Brunskill
+---
+layout: post
+title: "RL Lecture Notes: Sequential Decision Making"
+---
 
-Learning to make good sequential decisions
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
 
-Learning to make good decisions -- some notion of optimiality/utilty measure of the decisions being made.
+<div class="post">
 
-Making good decisions under uncertainty
+<blockquote>Reinforcement Learning - Lecture 1 - Emma Brunskill</blockquote>
 
-Delayed consequences
+<h3>Learning to Make Good Sequential Decisions</h3>
 
-When planning: decisions involve resasoning about not just immediate benefit of a decision but also its longer term ramifications.
+<p>Key aspects of reinforcement learning:</p>
 
-When learning: temporarl credit assignment is hard (what caused later high or low rewards?)
+<ul>
+<li><strong>Optimization</strong>: Finding policies that maximize expected reward</li>
+<li><strong>Exploration</strong>: Balancing exploration vs exploitation</li>
+<li><strong>Generalization</strong>: Transferring knowledge to new situations</li>
+<li><strong>Delayed Consequences</strong>: Decisions have long-term ramifications</li>
+</ul>
 
-Policy is mapping from past experience to action
+<h3>Challenges</h3>
 
-RL
-Optimization
-Exploration
-Generalization
-Delayed Consequences
+<p><strong>When planning</strong>: Decisions involve reasoning about not just immediate benefit but also longer-term ramifications.</p>
 
-Supervised Learning is typically making 1 decision instead of a sequence of decisions.
+<p><strong>When learning</strong>: Temporal credit assignment is hard - what caused later high or low rewards?</p>
 
-Imitation Learning
-Optimization/Generalization/Delayed Consequences
-Learns from experience of others
-Assumes input demos of good policies
+<h3>Policy</h3>
 
-Imitation  + Reinforcement Learning seems promising
+<p>A policy is a mapping from past experience to action.</p>
 
-// How do we proceed?
+<h3>Comparison with Other Paradigms</h3>
 
-1. Explore the world/use experience to guide future decisions
+<p><strong>Supervised Learning</strong>: Typically making one decision instead of a sequence of decisions.</p>
 
-Questions:
-1. Where do these rewards come from?
-	a. What happens if we get the wrong kind of rewards
-2. Robustness/Risk sensititvity
+<p><strong>Imitation Learning</strong>: Learns from experience of others, assumes input demos of good policies. Imitation + RL seems promising.</p>
 
+<h3>Sequential Decision Making Under Uncertainty</h3>
 
-<bold>Sequential Decision Making Under Uncertainty</bold>
+<p>Goal: Maximize the total expected future reward (the world is stochastic so the agent maximizes rewards in expectation).</p>
 
-Maximize the total expected future reward (the world is stochastic so the agent will be maximizing rewards in expectation)
+<h3>The Markov Assumption</h3>
 
-Teaching agent -- choose a teaching activity -- reward is the student's performance on that particular activity.
+<p>State \(s_t\) is Markov if and only if:</p>
 
-Machine Teaching -- where the environment is aware that the agent is trying to teach them something and thus, acts in a cooperative way. This could in an adverserial way as well.
+$$p(s_{t+1} | s_t, a_t) = p(s_{t+1} | h_{t}, a_{t})$$
 
-The famous Markov assumption -- sufficient statistic of history
+<p>The current state is a sufficient statistic of history.</p>
 
-State $$s_t$$ is Markov if and only if: $$p(s_{t+1} | s_t, a_t) = p(s_{t+1} | h_{t}, a_{t})$$
+<h3>Problem Variants</h3>
 
+<ul>
+<li>Finite horizon vs. infinite horizon</li>
+<li>Stationary vs. non-stationary</li>
+</ul>
 
-Finite horizon vs. Inifinite horizon
-
-Stationary vs. Non-stationary
-
-
-
-
-
+</div>

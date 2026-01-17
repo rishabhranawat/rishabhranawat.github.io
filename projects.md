@@ -3,28 +3,35 @@ layout: page
 title: Projects
 ---
 
-<strong><a href="{{ site.baseurl }}/public/documents/speeding-svt.pdf">Speeding Up Singular Value Thresholding</a></strong><br>
+<h2>Open Source</h2>
+
+<strong><a href="https://github.com/rishabhranawat/DataRater">DataRater</a></strong><br>
 <p class="message">
-	In this paper, we discuss a Singular Value Thresholding (SVT) algorithm for matrix completion proposed by Cai et. al. The SVT is a simple first-order and an easy to implement algorithm that is efficient at addressing problems that have low rank solutions. We evaluate the performance of the algorithm and its different SVD variants on 3 different datasets - (E1) randomly generated matrices (E2) matrix of Geodesic distances between cities (E3) student learning datasets.
+	Open-source implementation of <a href="https://arxiv.org/abs/2505.17895">DataRater</a> (NeurIPS 2025), a meta-learning framework for automated dataset curation. The system learns to assess individual data point quality and reweight training samples to improve model training efficiency. Built with PyTorch, featuring extensible model and dataset registration.
 </p>
 
+<strong><a href="https://github.com/rishabhranawat/DataMixer">DataMixer</a></strong><br>
+<p class="message">
+	A Python library for combining multiple datasets using customizable algorithms. Implements research-backed approaches including UniMax (Chung et al., 2023) for multilingual pretraining and UtiliMax (Held et al., 2025) for utility-based data mixing. Provides a modular framework separating combination strategies from sampling logic.
+</p>
+
+<h2>Academic Projects</h2>
+
+<strong><a href="{{ site.baseurl }}/public/documents/speeding-svt.pdf">Speeding Up Singular Value Thresholding</a></strong><br>
+<p class="message">
+	Analysis of the Singular Value Thresholding (SVT) algorithm for matrix completion proposed by Cai et al. Evaluated performance of the algorithm and its SVD variants on randomly generated matrices, geodesic distance matrices, and student learning datasets.
+</p>
 
 <strong><a href="{{ site.baseurl }}/public/documents/discriminator-gans.pdf">Generative Adversarial Networks: Using the Discriminator as a Classifier</a></strong><br>
 with Arvi Gjoka and Yun Bin Zhang <br>
 <p class="message">
-	In this project, we tried to investigate how well can a discriminator act as an independent classifier. We ran experiments to evaluate its performance against VGG.
+	Investigated how well a GAN discriminator can act as an independent classifier. Ran experiments comparing discriminator classification performance against VGG on image classification tasks.
 </p>
 
-<strong><a href="">BetweenTheLines</a></strong><br>
+<strong><a href="https://github.com/rishabhranawat/BetweenTheLines">BetweenTheLines</a></strong><br>
 with Shivaditya Sinha <br>
 <p class="message">
-	In this project, we worked on a various small-scale data driven informal research projects. 
-	<a href="https://github.com/rishabhranawat/BetweenTheLines"> Code </a> and articles: <br><br>
-	<a href="https://extranewsfeed.com/what-does-twitter-have-to-say-about-trumps-executive-order-on-immigration-602f45eeef32">What does Twitter have to say about Trump's Executive Order on Immigration?</a><br><br>
-	<a href="https://www.google.com/search?q=nyu+economics+review+rishabh+ranawat&oq=nyu+economics+review+r&aqs=chrome.1.69i57j69i59.3935j0j7&sourceid=chrome&ie=UTF-8"> The Video War – A Rising Facebook Challenges YouTube’s Dominance </a><br>
-</p>
-
-<strong><a href="">Programming Challenges</a></strong><br>
-<p class="message">
-	I try to solve programming problems in my free time. <a href="https://github.com/rishabhranawat/"> Here </a> is a repository with some of my solutions.
+	Small-scale data-driven research projects including:
+	<br><br>
+	<a href="https://extranewsfeed.com/what-does-twitter-have-to-say-about-trumps-executive-order-on-immigration-602f45eeef32">What does Twitter have to say about Trump's Executive Order on Immigration?</a>
 </p>

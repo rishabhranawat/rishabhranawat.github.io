@@ -6,9 +6,9 @@ permalink:        pretty
 
 
 # Setup
-title:            ''
-tagline:          ''
-description:      'Rishabh Ranawat. Notes.'
+title:            'Rishabh Ranawat'
+tagline:          'Software Engineer @ Google'
+description:      'Notes on ML, reinforcement learning, and software engineering.'
 baseurl:          ''
 
 author:

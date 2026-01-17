@@ -1,27 +1,52 @@
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
-  </script>
+---
+layout: post
+title: "A3C: Asynchronous Advantage Actor-Critic"
+---
 
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
 
 <div class="post">
 
-<blockquote>Reading Group: Asynchronous Methods for Deep Reinforcement Learning V Minh. et. al.</blockquote>
+<blockquote>Reading Group: Asynchronous Methods for Deep Reinforcement Learning (Mnih et al.)</blockquote>
 
+<h3>Motivation</h3>
 
-<p>The sequence of observed data encountered by an online RL agent is non-stationary, and online RL updates are strongly correlated. By storing the agent's data in an experience replay memory, the data can be batched or randomly sampled from different-steps.</p>
+<p>The sequence of observed data encountered by an online RL agent is non-stationary, and online RL updates are strongly correlated. By storing the agent's data in an experience replay memory, the data can be batched or randomly sampled from different time steps.</p>
 
-<i>Drawbacks of experience replay</i>
+<h3>Drawbacks of Experience Replay</h3>
 
+<ul>
+<li>Uses more memory and computation per interaction</li>
+<li>Requires off-policy learning algorithms</li>
+</ul>
 
-<h4>Asynchronous RL Framework</h4>
+<h3>Asynchronous RL Framework</h3>
 
-They present multi-threade asynchronous variants of one-step SARSA, one-step Q learning, n-step Q learning and advantage actor-critic.
+<p>The paper presents multi-threaded asynchronous variants of:</p>
 
-Actor-critic being an on-policy search method and Q-learning being an off-policy value-based method
+<ul>
+<li>One-step SARSA</li>
+<li>One-step Q-learning</li>
+<li>N-step Q-learning</li>
+<li>Advantage actor-critic (A3C)</li>
+</ul>
 
+<p>Key insight: Actor-critic is an on-policy search method while Q-learning is an off-policy value-based method. Running multiple agents in parallel on different threads provides diverse, decorrelated experience without replay memory.</p>
 
-<i>Gorila Framework</i>
-<i>Hogwild!</i>
+<h3>Key Benefits</h3>
 
+<ul>
+<li><strong>Decorrelated updates</strong>: Different threads explore different parts of the environment</li>
+<li><strong>No replay memory needed</strong>: Enables on-policy methods like actor-critic</li>
+<li><strong>CPU-friendly</strong>: Runs on multi-core CPUs rather than requiring GPUs</li>
+</ul>
 
+<h3>Related Work</h3>
+
+<ul>
+<li>Gorila Framework: Distributed RL with parameter servers</li>
+<li>Hogwild!: Lock-free parallel SGD</li>
+</ul>
 
 </div>

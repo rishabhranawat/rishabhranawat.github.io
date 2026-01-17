@@ -1,16 +1,59 @@
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
-  </script>
+---
+layout: post
+title: Connectionist Temporal Classification (CTC)
+---
 
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
 
 <div class="post">
 
-<blockquote>Connectionist Temporal Classification: Labelling Unsegmented Sequencce Data with Recurrent Neural Networks by Graves et. al.</blockquote>
+<blockquote>Labelling Unsegmented Sequence Data with Recurrent Neural Networks (Graves et al.)</blockquote>
 
+<h3>The Problem</h3>
 
-Useful links:
+<p>When training models for sequence-to-sequence tasks like speech recognition or handwriting recognition, we often face a challenge: the input and output sequences have different lengths, and we don't know the alignment between them.</p>
+
+<p>For example, in speech recognition:</p>
 <ul>
-<li>https://distill.pub/2017/ctc/</li>
-<li>https://stats.stackexchange.com/questions/320868/what-is-connectionist-temporal-classification-ctc</li>
-<li>https://towardsdatascience.com/intuitively-understanding-connectionist-temporal-classification-3797e43a86c</li>
+<li>Input: Audio frames (e.g., 1000 frames)</li>
+<li>Output: Text ("hello" - 5 characters)</li>
 </ul>
+
+<p>Traditional approaches require frame-level alignments, which are expensive to obtain.</p>
+
+<h3>CTC Solution</h3>
+
+<p>CTC introduces a blank token (often denoted \(\epsilon\)) and defines a many-to-one mapping from frame-level predictions to output sequences. Multiple frame-level paths can map to the same output.</p>
+
+<p>For example, these all map to "cat":</p>
+<ul>
+<li>\(\epsilon c a a t \epsilon\)</li>
+<li>\(c c \epsilon a t t\)</li>
+<li>\(\epsilon \epsilon c a t\)</li>
+</ul>
+
+<h3>The CTC Loss</h3>
+
+<p>The CTC loss is the negative log probability of the correct output sequence, marginalized over all possible alignments:</p>
+
+\[ L_{CTC} = -\log \sum_{\pi \in \mathcal{B}^{-1}(y)} P(\pi | x) \]
+
+<p>where \(\mathcal{B}^{-1}(y)\) is the set of all paths that map to output \(y\).</p>
+
+<h3>Key Properties</h3>
+
+<ul>
+<li><strong>Alignment-free</strong>: No need for pre-segmented training data</li>
+<li><strong>Differentiable</strong>: Uses dynamic programming (forward-backward algorithm) for efficient computation</li>
+<li><strong>Monotonic</strong>: Assumes input-output alignment is monotonic (left-to-right)</li>
+</ul>
+
+<h3>Resources</h3>
+
+<ul>
+<li><a href="https://distill.pub/2017/ctc/">Distill: Sequence Modeling with CTC</a></li>
+<li><a href="https://towardsdatascience.com/intuitively-understanding-connectionist-temporal-classification-3797e43a86c">Intuitively Understanding CTC</a></li>
+</ul>
+
 </div>

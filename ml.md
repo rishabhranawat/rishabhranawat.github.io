@@ -1,6 +1,10 @@
 ---
 layout: page
-title: ml
+title: ML
 ---
 
-<p>The sole purpose is to go through algorithms and create a resource that would be helpful for people who want a mix of top-down and bottom-up approach to getting started in Machine Leanring.</p>
+<p class="message">
+A collection of notes on machine learning algorithms and concepts, combining theoretical foundations with practical implementations.
+</p>
+
+Browse the <a href="/">blog posts</a> for detailed notes on specific topics including reinforcement learning, deep learning, and sequence models.
