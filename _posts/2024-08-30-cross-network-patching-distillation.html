@@ -1,0 +1,68 @@
+---
+layout: post
+title: "How Does Model Distillation Impact Circuits?"
+---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<div class="post">
+
+<blockquote>Using cross-network patching to compare circuits between GPT2-Small and DistilGPT2</blockquote>
+
+<p>This research explores how neural circuits are preserved (or transformed) during model distillation. The central question: <strong>how comparable is a circuit identified in a transformer model to the corresponding circuit in its distilled version?</strong></p>
+
+<h3>The Approach: Cross-Network Patching</h3>
+
+<p>I introduced a technique called <strong>cross-network patching</strong>, which extends traditional activation patching to compare circuits across different model architectures. By examining GPT2-Small (85M parameters, 12 layers) and DistilGPT2 (42M parameters, 6 layers), we can investigate how information is compressed during distillation.</p>
+
+<h3>Task: Pronoun Resolution</h3>
+
+<p>We focused on the "Choosing The Right Pronoun" task, testing the model's ability to select contextually appropriate pronouns. The primary metric is the average difference in logits between correct and incorrect pronoun predictions.</p>
+
+<h3>Methodology</h3>
+
+<ol>
+<li><strong>Direct Logit Attribution</strong>: Identify layers, heads, and attention patterns crucial for pronoun resolution in both models</li>
+<li><strong>Cross-Model Component Mapping</strong>: Map analogous components between GPT2-Small and DistilGPT2</li>
+<li><strong>Cross-Network Patching</strong>: Patch activations between models and measure impact on performance</li>
+</ol>
+
+<h3>Key Findings</h3>
+
+<p><strong>Component Mapping:</strong></p>
+<ul>
+<li>GPT2-Small layers \(\geq\) L10 map to DistilGPT2 layers \(\geq\) L4</li>
+<li>GPT2-Small L10H9 ↔ DistilGPT2 L5H1</li>
+<li>GPT2-Small L11H8 ↔ DistilGPT2 L5H8</li>
+</ul>
+
+<p><strong>Patching Results:</strong></p>
+<ul>
+<li><strong>Upswap</strong> (replace distilled with original): Improves average logit difference (+68%) but reduces accuracy (-7.7%)</li>
+<li><strong>Downswap</strong> (replace original with distilled): No significant performance degradation</li>
+<li>Attention patterns from specific impactful heads transfer better than expected</li>
+</ul>
+
+<h3>Conclusions</h3>
+
+<ul>
+<li><strong>Circuit Preservation</strong>: The pronoun resolution circuit is largely preserved during distillation</li>
+<li><strong>Transferability</strong>: Attention patterns from impactful heads transfer seamlessly between models</li>
+<li><strong>Confidence vs Accuracy Trade-off</strong>: Upswapping increases model confidence but decreases accuracy</li>
+</ul>
+
+<h3>Future Directions</h3>
+
+<ul>
+<li>Use ACDC for automated circuit discovery</li>
+<li>Apply path patching for deeper analysis</li>
+<li>Extend to other language tasks</li>
+<li>Develop distillation techniques that specifically preserve critical circuits</li>
+</ul>
+
+<p>Code: <a href="https://github.com/rishabhranawat/cross-network-patching">github.com/rishabhranawat/cross-network-patching</a></p>
+
+<p><em>This work builds on tools from Neel Nanda and Arthur Conmy, and extends Mathwin et al.'s work on pronoun identification circuits.</em></p>
+
+</div>

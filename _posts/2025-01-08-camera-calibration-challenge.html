@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Solving comma.ai's Camera Calibration Challenge"
+---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+<div class="post">
+
+<blockquote>Achieving 7.77% error using optical flow and median aggregation</blockquote>
+
+<p>I worked on <a href="https://github.com/rishabhranawat/calib_challenge">comma.ai's camera calibration challenge</a>, which asks you to predict camera pitch and yaw angles from dashcam video. The goal is to determine how the camera is misaligned relative to the vehicle's direction of travel.</p>
+
+<h3>The Key Insight</h3>
+
+<p>The critical realization was that <strong>camera calibration is constant per video</strong>. Unlike per-frame predictions that need smoothing, I could aggregate optical flow data across all frames and use the <strong>median</strong> as a robust calibration estimate.</p>
+
+<h3>The Algorithm</h3>
+
+<p>The solution uses the <strong>Focus of Expansion (FOE)</strong> theory: when a camera moves forward, the optical flow radiates outward from a single point. If the camera is misaligned, this point shifts from the image center.</p>
+
+<p><strong>Per-frame pipeline:</strong></p>
+<ol>
+<li>Shi-Tomasi corner detection (up to 3,000 features per frame)</li>
+<li>Lucas-Kanade pyramidal optical flow tracking</li>
+<li>Forward-backward validation to filter bad tracks</li>
+<li>RANSAC-based FOE estimation (1,000 iterations)</li>
+</ol>
+
+<p><strong>Video-level aggregation:</strong></p>
+<ul>
+<li>Collect FOE estimates from all frames</li>
+<li>Apply median pooling to handle outliers from turns, stops, and tracking failures</li>
+<li>Convert pixel offset to pitch/yaw angles</li>
+</ul>
+
+<h3>Implementation Details</h3>
+
+<ul>
+<li>ROI masking: exclude sky (top 40%) and hood (bottom 10%)</li>
+<li>Flow magnitude filtering: only use flows \(\geq 7.0\) pixels for reliability</li>
+<li>RANSAC with 1,000 iterations for robust FOE estimation</li>
+</ul>
+
+<h3>Results</h3>
+
+<ul>
+<li><strong>Overall MSE</strong>: 0.000118</li>
+<li><strong>Error score</strong>: 7.77% (target was &lt;25%)</li>
+<li><strong>Improvement over baseline</strong>: 92.23% error reduction</li>
+</ul>
+
+<p>Code: <a href="https://github.com/rishabhranawat/calib_challenge">github.com/rishabhranawat/calib_challenge</a></p>
+
+</div>
