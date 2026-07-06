@@ -9,6 +9,48 @@ title: "XQuiz: AI-Powered Learning from Your Twitter Feed"
 
 <p>I built <a href="https://github.com/rishabhranawat/xquiz">XQuiz</a>, a Chrome extension that generates AI-powered quiz questions based on the content you scroll past on Twitter/X. The idea is to enhance focus and information retention while browsing.</p>
 
+<style>
+.xquiz-gallery {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 0 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.xquiz-gallery figure {
+  flex: 0 0 auto;
+  margin: 0;
+  scroll-snap-align: start;
+}
+.xquiz-gallery img {
+  height: 520px;
+  width: auto;
+  border-radius: 8px;
+  border: 1px solid #e1e1e1;
+  display: block;
+}
+.xquiz-gallery figcaption {
+  margin-top: 8px;
+  font-size: 0.85em;
+  color: #7a7a7a;
+  text-align: center;
+}
+</style>
+
+<div class="xquiz-gallery">
+  <figure>
+    <img src="{{site.baseurl}}/public/images/xquiz_quiz.png" alt="XQuiz quiz interface showing a true/false question with score, streak, and accuracy tracking">
+    <figcaption>Quiz interface — questions generated from your feed, with score and streak tracking</figcaption>
+  </figure>
+  <figure>
+    <img src="{{site.baseurl}}/public/images/xquiz_settings.png" alt="XQuiz settings panel with AI model selection, pages to track, and quiz frequency controls">
+    <figcaption>Settings — pick the AI model, pages to track, and quiz frequency</figcaption>
+  </figure>
+</div>
+
+<p><em>Scroll the gallery above horizontally to see more screenshots.</em></p>
+
 <h3>The Problem</h3>
 
 <p>We scroll through enormous amounts of information on social media, but how much do we actually retain? Most content passes through our attention without sticking. What if we could turn that passive consumption into active learning?</p>
