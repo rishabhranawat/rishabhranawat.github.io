@@ -52,6 +52,10 @@ title: "DataRater: Meta-Learned Dataset Curation"
 
 <p>Evaluating on corrupted MNIST data, filtering out the lowest 10% of samples based on DataRater scores achieved ~97.32% test accuracy versus 97.08% for baseline training. The system learns to identify and downweight corrupted or mislabeled samples without explicit supervision.</p>
 
+<img src="{{site.baseurl}}/public/images/datarater_mnist_combined_grid.png" alt="DataRater score vs. image corruption across meta-training steps on MNIST">
+
+<p>The plot above shows how DataRater's scores relate to the fraction of corrupted pixels in each MNIST image as meta-training progresses. Early on (step 1) the relationship is essentially uninformative, but over successive meta-iterations DataRater learns a clear negative correlation: more heavily corrupted images receive progressively lower scores. In other words, the meta-learner discovers how to weight examples in inverse proportion to their corruption, without ever being told which samples were corrupted.</p>
+
 <h3>Key Benefits</h3>
 
 <ul>

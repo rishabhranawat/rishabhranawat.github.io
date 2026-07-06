@@ -1,0 +1,37 @@
+---
+layout: post
+title: "Fairchild: An Evaluation-Native IDE for Chip Design"
+---
+
+<div class="post">
+
+<blockquote>Turning a natural-language hardware request into verified RTL — and keeping what's measured separate from what's guessed</blockquote>
+
+<p>At the Inference-Time Compute Hackathon, my teammates and I built <a href="https://github.com/rishabhranawat/chips">Fairchild</a>, a tuned chip-design model paired with an evaluation-native IDE. You type a natural-language hardware request, and the system turns it into a structured spec, extracts the compute kernels, proposes hardware candidates, estimates how the workload runs on each, generates real RTL for the winner, verifies that RTL with Verilator, and writes an evidence-backed report. You can read more on the <a href="https://devpost.com/software/fairchild">Devpost</a>.</p>
+
+<h3>The Problem</h3>
+
+<p>Generic LLMs are bad at hardware design. They produce confidently incorrect RTL that is hard to validate, blurring the line between numbers the model guessed and numbers a tool actually measured. Fairchild's core idea is to keep those two things visually and verbally separate everywhere: every estimated performance number is tagged <code>[ESTIMATE]</code>, and every tool-verified result is tagged <code>[MEASURED]</code>.</p>
+
+<h3>How It Works</h3>
+
+<p>The system is two layers:</p>
+
+<ul>
+<li><strong>The model</strong>: Qwen2.5-Coder-7B-Instruct, fine-tuned with QLoRA for Verilog generation and tool-error repair, measured on a held-out benchmark as base vs. tuned vs. tuned+repair.</li>
+<li><strong>The IDE</strong>: a Streamlit app that drives a staged pipeline and shows the tuned model working <em>inside</em> a verification-driven loop. The model proposes, the tools evaluate, and the IDE explains.</li>
+</ul>
+
+<p>The pipeline runs as a sequence of grounded stages: a natural-language prompt is compiled into a structured spec, the spec's compute kernels are extracted, hardware candidates are generated and ranked under the stated constraints, RTL is generated for the winning candidate, and Verilator lints that RTL to produce a measured result rather than an estimated one.</p>
+
+<h3>What I Worked On</h3>
+
+<p>My focus was the model training side — the QLoRA fine-tuning of Qwen2.5-Coder for Verilog generation and RTL repair, and the benchmark that proves the tuned model actually beats the base model. This was built together with Eva Zhu, Yeabsira Mulugeta, and Arpit Khandelwal.</p>
+
+<h3>Grounding in the Literature</h3>
+
+<p>The design draws on two papers: <strong>ChipNeMo</strong> shows generic LLMs are weak at chip design and that domain adaptation plus grounded evaluation is what moves the needle, and <strong>NL2GDS</strong> argues natural-language-to-chip should be a staged flow with tool feedback and iterative repair. Fairchild is our attempt to put both lessons into a single working product.</p>
+
+<p>Check out the project: <a href="https://github.com/rishabhranawat/chips">github.com/rishabhranawat/chips</a>.</p>
+
+</div>
