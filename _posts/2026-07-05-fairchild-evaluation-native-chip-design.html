@@ -28,10 +28,20 @@ title: "Fairchild: An Evaluation-Native IDE for Chip Design"
 
 <p>My focus was the model training side — the QLoRA fine-tuning of Qwen2.5-Coder for Verilog generation and RTL repair, and the benchmark that proves the tuned model actually beats the base model. This was built together with Eva Zhu, Yeabsira Mulugeta, and Arpit Khandelwal.</p>
 
+<h3>Results</h3>
+
+<p>Post-training clearly helped. On the held-out SFT validation split, the tuned LoRA adapter roughly halved the eval loss (0.490 → 0.245), dropped perplexity from 1.63 to 1.28, and improved next-token accuracy by ~4 percentage points (88.6% → 92.7%) — all from a single ~4-hour run on one H100.</p>
+
+<img src="{{site.baseurl}}/public/images/fairchild_training_results.png" alt="Held-out SFT validation comparing the base Qwen2.5-Coder-7B model against the tuned LoRA adapter, plus the training loss curve">
+
+<p>What matters more than LM loss, though, is whether the generated RTL actually compiles and passes testbenches. On a held-out set of 155 VerilogEval spec-to-RTL tasks scored with Icarus/Verilator, the tuned model (v5) beat the base model across the board — compile pass rate 0.81 → 0.89, functional test pass 0.35 → 0.38, and pass@3 0.46 → 0.50.</p>
+
+<img src="{{site.baseurl}}/public/images/fairchild_benchmark_results.png" alt="Benchmark eval results: running test-pass and compile-pass curves for tuned v5 vs. base, with a pass@1/pass@3 comparison table">
+
 <h3>Grounding in the Literature</h3>
 
 <p>The design draws on two papers: <strong>ChipNeMo</strong> shows generic LLMs are weak at chip design and that domain adaptation plus grounded evaluation is what moves the needle, and <strong>NL2GDS</strong> argues natural-language-to-chip should be a staged flow with tool feedback and iterative repair. Fairchild is our attempt to put both lessons into a single working product.</p>
 
-<p>Check out the project: <a href="https://github.com/rishabhranawat/chips">github.com/rishabhranawat/chips</a>.</p>
+<p>Check out the project: <a href="https://github.com/rishabhranawat/chips">github.com/rishabhranawat/chips</a>. You can also browse the full <a href="{{site.baseurl}}/public/documents/fairchild-hackathon-slides.pdf">hackathon slide deck</a>.</p>
 
 </div>
